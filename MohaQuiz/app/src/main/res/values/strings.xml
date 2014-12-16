@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Moha Quiz</string>
+    <string name="hello_world">World Quiz</string>
+    <string name="action_settings">Settings</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!!</string>
+    <string name="next_button">Next</string>
+    <string name="prev_button">Previous</string>
+    <string name="question_europe">Ghent in Belgium.</string>
+    <string name="question_asia">Malasya has the Sharia law.</string>
+    <string name="question_africa">The whole African continent is infected with Ebola.</string>
+    <string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>
+    <string name="cheat_message">Cheating is wrong.</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">Show Answer</string>
+</resources>
