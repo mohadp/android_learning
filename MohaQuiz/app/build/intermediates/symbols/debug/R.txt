@@ -248,12 +248,13 @@ int id action_context_bar 0x7f08001d
 int id action_menu_divider 0x7f080001
 int id action_menu_presenter 0x7f080002
 int id action_mode_close_button 0x7f080024
-int id action_settings 0x7f080044
+int id action_settings 0x7f080045
 int id activity_chooser_view_content 0x7f080025
 int id always 0x7f080013
 int id answerTextView 0x7f08003c
 int id beginning 0x7f08000f
-int id cheat_button 0x7f080042
+int id build_number 0x7f08003e
+int id cheat_button 0x7f080043
 int id checkbox 0x7f08002d
 int id collapseActionView 0x7f080014
 int id default_activity_button 0x7f080028
@@ -264,7 +265,7 @@ int id edit_query 0x7f080030
 int id end 0x7f080010
 int id expand_activities_button 0x7f080026
 int id expanded_menu 0x7f08002c
-int id false_button 0x7f080041
+int id false_button 0x7f080042
 int id home 0x7f080003
 int id homeAsUp 0x7f08000a
 int id icon 0x7f08002a
@@ -274,10 +275,10 @@ int id listMode 0x7f080006
 int id list_item 0x7f080029
 int id middle 0x7f080011
 int id never 0x7f080016
-int id next_button 0x7f080043
+int id next_button 0x7f080044
 int id none 0x7f080012
 int id normal 0x7f080007
-int id prev_button 0x7f08003e
+int id prev_button 0x7f080040
 int id progress_circular 0x7f080004
 int id progress_horizontal 0x7f080005
 int id question_text_view 0x7f08003f
@@ -302,7 +303,7 @@ int id submit_area 0x7f080039
 int id tabMode 0x7f080008
 int id title 0x7f08002b
 int id top_action_bar 0x7f080020
-int id true_button 0x7f080040
+int id true_button 0x7f080041
 int id up 0x7f080021
 int id useLogo 0x7f08000e
 int id withText 0x7f080017

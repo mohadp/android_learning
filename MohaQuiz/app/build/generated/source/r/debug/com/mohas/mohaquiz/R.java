@@ -829,12 +829,13 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f080001;
         public static final int action_menu_presenter=0x7f080002;
         public static final int action_mode_close_button=0x7f080024;
-        public static final int action_settings=0x7f080044;
+        public static final int action_settings=0x7f080045;
         public static final int activity_chooser_view_content=0x7f080025;
         public static final int always=0x7f080013;
         public static final int answerTextView=0x7f08003c;
         public static final int beginning=0x7f08000f;
-        public static final int cheat_button=0x7f080042;
+        public static final int build_number=0x7f08003e;
+        public static final int cheat_button=0x7f080043;
         public static final int checkbox=0x7f08002d;
         public static final int collapseActionView=0x7f080014;
         public static final int default_activity_button=0x7f080028;
@@ -845,7 +846,7 @@ containing a value of this type.
         public static final int end=0x7f080010;
         public static final int expand_activities_button=0x7f080026;
         public static final int expanded_menu=0x7f08002c;
-        public static final int false_button=0x7f080041;
+        public static final int false_button=0x7f080042;
         public static final int home=0x7f080003;
         public static final int homeAsUp=0x7f08000a;
         public static final int icon=0x7f08002a;
@@ -855,10 +856,10 @@ containing a value of this type.
         public static final int list_item=0x7f080029;
         public static final int middle=0x7f080011;
         public static final int never=0x7f080016;
-        public static final int next_button=0x7f080043;
+        public static final int next_button=0x7f080044;
         public static final int none=0x7f080012;
         public static final int normal=0x7f080007;
-        public static final int prev_button=0x7f08003e;
+        public static final int prev_button=0x7f080040;
         public static final int progress_circular=0x7f080004;
         public static final int progress_horizontal=0x7f080005;
         public static final int question_text_view=0x7f08003f;
@@ -883,7 +884,7 @@ containing a value of this type.
         public static final int tabMode=0x7f080008;
         public static final int title=0x7f08002b;
         public static final int top_action_bar=0x7f080020;
-        public static final int true_button=0x7f080040;
+        public static final int true_button=0x7f080041;
         public static final int up=0x7f080021;
         public static final int useLogo=0x7f08000e;
         public static final int withText=0x7f080017;
