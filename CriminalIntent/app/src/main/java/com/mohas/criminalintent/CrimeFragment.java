@@ -7,7 +7,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.text.format.DateFormat;
 
 
 /**
@@ -24,6 +28,8 @@ public class CrimeFragment extends Fragment {
 
     //References to the widgets in the layout
     private EditText mTitleField;
+    private Button mDateButton;
+    private CheckBox mSolvedCheckBox;
 
 
     @Override
@@ -38,6 +44,8 @@ public class CrimeFragment extends Fragment {
 
         //Add reference to widgets
         mTitleField = (EditText)v.findViewById(R.id.crime_title);
+        mDateButton = (Button)v.findViewById(R.id.crime_date);
+        mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
 
         //Add listeners to the widgets
         mTitleField.addTextChangedListener(new TextWatcher(){
@@ -53,6 +61,19 @@ public class CrimeFragment extends Fragment {
                 //Nothing now
             }
         });
+
+        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                //set the crime's solved property
+                CrimeFragment.this.mCrime.setSolved(isChecked);
+            }
+        });
+
+        //Other initialization of widgets
+
+        mDateButton.setText(DateFormat.format("EEEE, MMM d, yyyy", mCrime.getDate()));
+        mDateButton.setEnabled(false);
 
         return v;
     }
