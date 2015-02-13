@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/tabHost">
+    android:id="@android:id/tabhost"
+    android:transitionGroup="false">
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TabWidget
@@ -19,36 +20,39 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/Date"
+                android:id="@+id/date_tab"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
                 <DatePicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/dialog_datePicker"
+                    android:id="@+id/dialog_date_datePicker"
                     android:datePickerMode="spinner"
-                    android:calendarViewShown="false" />
+                    android:calendarViewShown="false"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/Time"
+                android:id="@+id/time_tab"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
                 <TimePicker
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/dialog_timePicker"
-                    android:timePickerMode="spinner" />
+                    android:id="@+id/dialog_time_timePicker"
+                    android:timePickerMode="spinner"
+                    android:layout_gravity="center"/>
 
-                </LinearLayout>
+            </LinearLayout>
+
         </FrameLayout>
     </LinearLayout>
 </TabHost>
