@@ -1,6 +1,7 @@
 package com.mohas.criminalintent;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -39,11 +40,24 @@ public class CrimeListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         Crime c = ((CrimeAdapter)l.getAdapter()).getItem(position);
         Log.d(this.getClass().getName(), c.getTitle());
+        Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+        i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getId());
+        this.startActivity(i);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+    }
+
+    /**
+     * Adapter for current this ListFragment's ListView so the adapter handles Crime objects.
+     */
     private class CrimeAdapter extends ArrayAdapter<Crime>{
 
         public CrimeAdapter(ArrayList<Crime> crimes){
+
             super(getActivity(),0, crimes);
         }
 
