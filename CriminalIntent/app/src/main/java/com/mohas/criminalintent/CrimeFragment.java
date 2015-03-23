@@ -5,9 +5,13 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -67,6 +71,7 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         UUID crimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
         if(crimeId != null){
@@ -80,6 +85,10 @@ public class CrimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_crime, parent, false);
+
+        if(NavUtils.getParentActivityName(getActivity()) != null) {
+            ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         //Add reference to widgets
         mTitleField = (EditText)v.findViewById(R.id.crime_title);
@@ -140,11 +149,29 @@ public class CrimeFragment extends Fragment {
                 mCrime.setDate(date);
                 updateDateButtonText();
         }
-
     }
 
     private void updateDateButtonText(){
         mDateButton.setText(DateFormat.format("EEEE, MMM d, yyyy hh:mm:ss", mCrime.getDate()));
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        CrimeLab.get(getActivity()).saveCrimes();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                if(NavUtils.getParentActivityName(this.getActivity()) != null){
+                    Log.d("CRIME", NavUtils.getParentActivityName(this.getActivity()));
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

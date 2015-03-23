@@ -1,7 +1,6 @@
 package com.mohas.criminalintent;
 
 import android.app.Fragment;
-import android.os.Bundle;
 
 /**
  * Created by Moha on 2/4/15.

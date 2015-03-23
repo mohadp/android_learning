@@ -14,6 +14,7 @@
         <activity
             android:name=".CrimePagerActivity"
             android:label="@string/title_activity_criminal" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".CrimeListActivity" />
         </activity>
         <activity
             android:name=".CrimeListActivity"
