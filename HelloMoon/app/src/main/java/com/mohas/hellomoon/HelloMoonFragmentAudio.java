@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 public class HelloMoonFragmentAudio extends HelloMoonFragmentBase {
 
     @Override
-    protected void initializeAudioVideoPlayer(){
-        mPlayer = new AudioVideoPlayer(this.getActivity(), R.raw.one_small_step);
+    protected void initializeAudioVideoPlayer(View v){
+        mPlayer = (mPlayer == null)? new AudioVideoPlayer(this.getActivity(), R.raw.one_small_step) : mPlayer;
     }
 
     @Override

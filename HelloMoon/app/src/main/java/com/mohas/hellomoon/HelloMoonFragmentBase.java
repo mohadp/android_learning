@@ -19,13 +19,14 @@ public abstract class HelloMoonFragmentBase extends Fragment {
 
     //Abstract methods
     protected abstract View inflatePlayStopView(LayoutInflater inflater, ViewGroup parent); //Create a vew based on a particular layout
-    protected abstract void initializeAudioVideoPlayer(); //creates instance of mPlayer
+    protected abstract void initializeAudioVideoPlayer(View v); //creates instance of mPlayer
 
 
     //Normal Methods
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        this.setRetainInstance(true);
     }
 
     @Override
@@ -33,7 +34,7 @@ public abstract class HelloMoonFragmentBase extends Fragment {
         View v = inflatePlayStopView(inflater, parent);
 
         getViewsAndSetListeners(v);
-        initializeAudioVideoPlayer();
+        initializeAudioVideoPlayer(v);
         setAudioPlayerListeners();
 
         return v;
@@ -56,6 +57,10 @@ public abstract class HelloMoonFragmentBase extends Fragment {
                 HelloMoonFragmentBase.this.mPlayer.stop();
             }
         });
+
+        if(mPlayer != null){
+            if(mPlayer.getState() == AudioVideoPlayer.STATE_PLAYING){ setPauseButton(); }
+        }
     }
 
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">HolaLuna</string>
+  <string name="title_activity_hello_moon">Hola Luna: Explorando la Luna</string>
+  <string name="action_settings">Configuración</string>
+  <string name="hellomoon_play">Reproducir</string>
+  <string name="hellomoon_stop">Detener</string>
+  <string name="hellomoon_pause">Pausar</string>
+  <string name="hellomoon_image_description">Neil Armstrong caminando en la luna</string>
+</resources>

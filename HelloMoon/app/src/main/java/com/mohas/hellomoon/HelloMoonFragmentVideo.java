@@ -15,25 +15,32 @@ import android.widget.Button;
  */
 public class HelloMoonFragmentVideo extends HelloMoonFragmentBase implements SurfaceHolder.Callback {
 
-    private SurfaceView mVideoSurface;
+    //private SurfaceView mVideoSurface;
+
 
     @Override
     protected void getViewsAndSetListeners(View v){
         super.getViewsAndSetListeners(v);
-        mVideoSurface = (SurfaceView) v.findViewById(R.id.hellomoon_surface);
+        //mVideoSurface = (SurfaceView) v.findViewById(R.id.hellomoon_surface);
         //mVideoSurface.setVisibility(SurfaceView.VISIBLE);
-        mVideoSurface.setZOrderOnTop(true);
+        //mVideoSurface.setZOrderOnTop(true);
 
     }
 
     @Override
-    protected void initializeAudioVideoPlayer(){
+    protected void initializeAudioVideoPlayer(View v){
         //getActivity().getWindow().setFormat(PixelFormat.UNKNOWN);
-        SurfaceHolder sh = mVideoSurface.getHolder();
+        SurfaceView surface = (SurfaceView) v.findViewById(R.id.hellomoon_surface);
+        surface.setZOrderOnTop(true);
+
+
         //sh.setFormat(PixelFormat.UNKNOWN);
         //sh.setSizeFromLayout();
-        sh.addCallback(this);
-        mPlayer = new AudioVideoPlayer(getActivity(), sh, R.raw.apollo_17_stroll);
+        if(mPlayer == null) {
+            mPlayer = new AudioVideoPlayer(getActivity(), surface.getHolder(), R.raw.apollo_17_stroll);
+        }
+
+        surface.getHolder().addCallback(this);
     }
 
     @Override
@@ -44,6 +51,7 @@ public class HelloMoonFragmentVideo extends HelloMoonFragmentBase implements Sur
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         //mPlayer.setSurfaceReady(true);
+        mPlayer.setVideoHolder(holder);
     }
 
     @Override
@@ -53,6 +61,6 @@ public class HelloMoonFragmentVideo extends HelloMoonFragmentBase implements Sur
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+        mPlayer.setVideoHolder(null);
     }
 }
