@@ -55,7 +55,7 @@ public class CrimeListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = super.onCreateView(inflater, parent, savedInstanceState);
 
-        final ListView listView = (ListView)v.findViewById(android.R.id.list);
+        ListView listView = (ListView)v.findViewById(android.R.id.list);
 
 
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){

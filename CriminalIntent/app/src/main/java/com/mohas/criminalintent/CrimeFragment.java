@@ -3,6 +3,10 @@ package com.mohas.criminalintent;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.app.NavUtils;
@@ -19,6 +23,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.text.format.DateFormat;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +41,9 @@ import java.util.UUID;
  */
 public class CrimeFragment extends Fragment {
 
+    //Debugging help
+    public static final String TAG = "CrimeFragment";
+
     //Intent extras used by calling fragments/activites
     public static final String EXTRA_CRIME_ID = "com.mohas.criminalintent.crime_id";
 
@@ -43,6 +52,7 @@ public class CrimeFragment extends Fragment {
 
     //Request codes to other fragments
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_PHOTO = 1;
 
     private Crime mCrime;
 
@@ -50,6 +60,8 @@ public class CrimeFragment extends Fragment {
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
 
 
     /**
@@ -82,6 +94,7 @@ public class CrimeFragment extends Fragment {
 
     }
 
+    @SuppressWarnings("depreciation")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_crime, parent, false);
@@ -94,6 +107,8 @@ public class CrimeFragment extends Fragment {
         mTitleField = (EditText)v.findViewById(R.id.crime_title);
         mDateButton = (Button)v.findViewById(R.id.crime_date);
         mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mPhotoButton = (ImageButton)v.findViewById(R.id.crime_imageButton);
+        mPhotoView = (ImageView)v.findViewById(R.id.crime_imageView);
 
         //Add listeners to the widgets
         mTitleField.addTextChangedListener(new TextWatcher(){
@@ -129,6 +144,20 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        mPhotoButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
+                startActivityForResult(i, REQUEST_PHOTO);
+            }
+        });
+
+        //Verify if the device has a camera...
+        boolean hasACamera = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD && Camera.getNumberOfCameras() > 0);
+        if(!hasACamera){
+            mPhotoButton.setEnabled(false);
+        }
+
         //Other initialization of widgets
         mTitleField.setText(mCrime.getTitle());
         updateDateButtonText();
@@ -148,6 +177,15 @@ public class CrimeFragment extends Fragment {
                 Date date = (Date)data.getSerializableExtra(TimeDatePickerFragment.EXTRA_DATE);
                 mCrime.setDate(date);
                 updateDateButtonText();
+                return;
+            case REQUEST_PHOTO:
+                String filename = data.getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
+                if(filename != null){
+                    mCrime.setPhoto(new Photo(filename));
+                    showPhoto();
+                    //Log.i(TAG, "Crime " + mCrime.getTitle() + " has a photo");
+                }
+                return;
         }
     }
 
@@ -162,6 +200,18 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        showPhoto();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        PictureUtils.cleanImageView(mPhotoView);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case android.R.id.home:
@@ -173,5 +223,15 @@ public class CrimeFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showPhoto(){
+        Photo p = mCrime.getPhoto();
+        BitmapDrawable b = null;
+        if(p != null){
+            String path = getActivity().getFileStreamPath(p.getFilename()).getAbsolutePath();
+            b = PictureUtils.getScaledDrawable(this.getActivity(), path);
+        }
+        mPhotoView.setImageDrawable(b);
     }
 }
